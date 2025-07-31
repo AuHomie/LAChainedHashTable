@@ -78,7 +78,7 @@ class ChainedHashtable{
     };
 
     template<class Type>
-    void add(Type item){
+    void ChainedHashtable<Type>::add(Type item){
         int key = item % capacity;
 
 
@@ -94,9 +94,53 @@ class ChainedHashtable{
             htable[key] = new Node<Type>();
             htable[key]->info = item;
             sz++;
-
         }
     };
+
+    template<class Type>
+    bool ChainedHashtable<Type>::contains(Type item){
+        int key = item % capacity;
+
+        auto curr = htable[key];
+
+        while (curr)
+        {
+           if (curr->info == item){
+            return true
+           }
+           curr = curr->linkl
+        }
+        return false;
+    };
+
+    template<class Type>
+    bool ChainedHashtable<Type>::remove(Type item){
+        if (empty){
+            std::runtime_error("Table is empty")
+        }
+        int key = item % capacity;
+        auto curr = htable[key];
+        Node<Type>* prev = nullptr;
+
+        while (curr){
+            if(curr->info == item){
+                if(prev){
+                    prev->link = curr->link;
+                    delete curr;
+                }
+                else{
+                    htable[key] = nullptr;
+                    delete curr;
+                }
+                sz--;
+                return true;
+            }
+            prev = curr;
+            curr = curr->link;
+        }
+        return false;
+    };
+
     /*
 ChainedHashtable(int max);// Constructor for the Hashtable.  Creates an empty list
 ~ChainedHashtable(); //Deconstructor for the Hashtable.  Deallocates memory 
