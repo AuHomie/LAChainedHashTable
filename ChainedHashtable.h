@@ -81,9 +81,22 @@ class ChainedHashtable{
     void add(Type item){
         int key = item % capacity;
 
-        if(ChainedHashtable[key])
-    };//Adds to the hashtable
 
+        //if there is a collistion
+        if(htable[key]){
+            auto node = new Node<Type>();
+            node->info = item;
+            node->link = htable[key];
+            htable[key] = node;
+            sz++;
+        }
+        else{
+            htable[key] = new Node<Type>();
+            htable[key]->info = item;
+            sz++;
+
+        }
+    };
     /*
 ChainedHashtable(int max);// Constructor for the Hashtable.  Creates an empty list
 ~ChainedHashtable(); //Deconstructor for the Hashtable.  Deallocates memory 
