@@ -1,4 +1,4 @@
-
+#include <iostream>
 
 /*
 ChainedHashtable(int max);// Constructor for the Hashtable.  Creates an empty list
