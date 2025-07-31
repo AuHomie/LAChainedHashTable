@@ -41,8 +41,8 @@ class ChainedHashtable{
 
         int size();//Determines the number of items in the hashtable
 
-
-        friend std::ostream& operator<<(std::ostream& out, ChainedHashtable<Type> & t);//Returns an output stream for displaying the Hashtable
+        template<class T>
+        friend std::ostream& operator<<(std::ostream& out, ChainedHashtable<T> & t);//Returns an output stream for displaying the Hashtable
 
 
 
