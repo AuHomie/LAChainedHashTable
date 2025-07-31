@@ -106,17 +106,17 @@ class ChainedHashtable{
         while (curr)
         {
            if (curr->info == item){
-            return true
+            return true;
            }
-           curr = curr->linkl
+           curr = curr->link;
         }
         return false;
     };
 
     template<class Type>
     bool ChainedHashtable<Type>::remove(Type item){
-        if (empty){
-            std::runtime_error("Table is empty")
+        if (empty()){
+            std::runtime_error("Table is empty");
         }
         int key = item % capacity;
         auto curr = htable[key];
@@ -141,14 +141,23 @@ class ChainedHashtable{
         return false;
     };
 
-    /*
-ChainedHashtable(int max);// Constructor for the Hashtable.  Creates an empty list
-~ChainedHashtable(); //Deconstructor for the Hashtable.  Deallocates memory 
-bool remove(Type item);//Removes an item from the hashtable.  Returns true if the item was successfully removed
-bool contains(Type item);//Determines if the value is in the hashtable
-bool empty();//Determines if the hashtable is empty
-int size();//Determines the number of items in the hashtable
-std::ostream& operator<<(std::ostream& out, ChainedHashtable<Type> & t);//Returns an output stream for displaying the Hashtable
-*/
+    template <class Type>
+    std::ostream& operator<<(std::ostream& out, ChainedHashtable<Type> & t){
+        for( int i = 0; i < t.capacity ; i++){
+            out << std::setw(8) << i <<"; ";
+            auto curr = t.htable[i];
+            while (curr)
+            {
+               out<< curr->info << " ";
+               if (curr->link)
+               {
+                out << "->";
+               }
+               curr = curr->link;
+            }//ends while
+            out << std::endl;
+        }// ends for 
+        return out;
+    }// ends extraction op
 
 #endif // CHAINEDHASHTABLE_H
